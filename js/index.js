@@ -20,7 +20,8 @@ function renderDSSV() {
       <td>${sv.ten}</td>
       <td>${sv.email}</td>
       <td>0</td>
-      <td><button id="btnDelete" onclick="xoaSV('${sv.ma}')" class="btn btn-danger">Delete</button></td>
+      <td><button id="btnDelete" onclick="xoaSV('${sv.ma}')" class="btn btn-danger">Delete</button>
+      <button id="btnFix" onclick="suaSV('${sv.ma}')" class="btn btn-warning">Fix</button></td>
   </tr>`;
       contentHTML += string;
     }
@@ -52,4 +53,33 @@ function xoaSV(ma){
 
         renderDSSV();
     }
+}
+
+function suaSV(ma) {
+    var viTri = DSSV.findIndex(function(item){
+        return item.ma === ma;
+    })
+    if (viTri != -1) {
+        var sv = DSSV[viTri];
+        domID("txtMaSV").value=sv.ma;
+        domID("txtTenSV").value=sv.ten;
+        domID("txtEmail").value=sv.email;
+        domID("txtPass").value=sv.matKhau;
+        domID("txtDiemToan").value=sv.diemToan;
+        domID("txtDiemLy").value=sv.diemLy;
+        domID("txtDiemHoa").value=sv.diemHoa;
+    }
+    domID("txtMaSV").setAttribute("readonly", true);
+}
+
+function capNhatSV() {
+    var sv = getFormInfo();
+    var viTri = DSSV.findIndex(function(item){
+        return item.ma === sv.ma;
+    })
+    DSSV[viTri] = sv;
+    var capNhatJSON = JSON.stringify(DSSV);
+    localStorage.setItem("DSSV_JSON", capNhatJSON);
+
+    renderDSSV();
 }
