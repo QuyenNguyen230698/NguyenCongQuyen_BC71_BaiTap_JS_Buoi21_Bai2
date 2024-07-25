@@ -5,26 +5,27 @@ function domID(id) {
 var DSSV = [];
 
 function themSV() {
-  var ma = domID("txtMaSV").value;
-  var ten = domID("txtTenSV").value;
-  var email = domID("txtEmail").value;
-  var matKhau = domID("txtPass").value;
-  var diemToan = domID("txtDiemToan").value * 1;
-  var diemLy = domID("txtDiemLy").value * 1;
-  var diemHoa = domID("txtDiemHoa").value * 1;
 
-  var sv = {
-    ma: ma,
-    ten: ten,
-    email: email,
-    matKhau: matKhau,
-    diemToan: diemToan,
-    diemLy: diemLy,
-    diemHoa: diemHoa,
-    tinhDTB: function () {
-      return (this.diemToan + this.diemLy + this.diemHoa) / 3;
-    },
-  };
+    var sv = getFormInfo()
+  
   DSSV.push(sv);
   console.log(DSSV);
+  renderDSSV()
 }
+
+function renderDSSV() {
+    var contentHTML = "";
+    for (var i = 0; i < DSSV.length; i++){
+        var sv = DSSV[i];
+        var string = `<tr>
+    <td>${sv.ma}</td>
+    <td>${sv.ten}</td>
+    <td>${sv.email}</td>
+    <td>${sv.tinhDTB()}</td>
+    <td><button id="btnDelete" class="btn btn-danger">Delete</button></td>
+</tr>`;
+contentHTML += string;
+    }
+    domID('tbodySinhVien').innerHTML = contentHTML;
+}
+
