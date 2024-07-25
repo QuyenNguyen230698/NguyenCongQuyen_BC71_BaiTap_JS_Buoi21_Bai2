@@ -7,7 +7,23 @@ var DSSV = [];
 // lấy dữ liệu từ local storage
 var data = localStorage.getItem("DSSV_JSON");
 // truyền data vào DSSV
-DSSV = JSON.parse(data);
+// DSSV = JSON.parse(data);
+var svArr = JSON.parse(data);
+for (var i = 0; i < svArr.length; i++) {
+    var data = svArr[i];
+    var sv = new model(
+      data.ma,
+      data.ten,
+      data.email,
+      data.matKhau,
+      data.diemToan,
+      data.diemLy,
+      data.diemHoa,
+      data.tinhDTB,
+    )
+    // duyệt mảng xong thì truyền dữ liệu vào mảng DSSV
+    DSSV.push(sv);
+  }
 
 renderDSSV();
 
@@ -19,7 +35,7 @@ function renderDSSV() {
       <td>${sv.ma}</td>
       <td>${sv.ten}</td>
       <td>${sv.email}</td>
-      <td>0</td>
+      <td>${sv.tinhDTB()}</td>
       <td><button id="btnDelete" onclick="xoaSV('${sv.ma}')" class="btn btn-danger">Delete</button>
       <button id="btnFix" onclick="suaSV('${sv.ma}')" class="btn btn-warning">Fix</button></td>
   </tr>`;
@@ -83,3 +99,4 @@ function capNhatSV() {
 
     renderDSSV();
 }
+

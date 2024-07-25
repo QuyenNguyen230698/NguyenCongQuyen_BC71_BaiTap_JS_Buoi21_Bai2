@@ -7,17 +7,20 @@ function getFormInfo() {
   var diemLy = domID("txtDiemLy").value * 1;
   var diemHoa = domID("txtDiemHoa").value * 1;
 
-  var sv = {
-    ma: ma,
-    ten: ten,
-    email: email,
-    matKhau: matKhau,
-    diemToan: diemToan,
-    diemLy: diemLy,
-    diemHoa: diemHoa,
-    tinhDTB: function () {
-      return (this.diemToan + this.diemLy + this.diemHoa) / 3;
-    },
-  };
+//   var sv = {
+//     ma: ma,
+//     ten: ten,
+//     email: email,
+//     matKhau: matKhau,
+//     diemToan: diemToan,
+//     diemLy: diemLy,
+//     diemHoa: diemHoa,
+//     tinhDTB: function () {
+//       return (this.diemToan + this.diemLy + this.diemHoa) / 3;
+//     },
+//   };
+
+var sv = new model(ma, ten, email, matKhau, diemToan, diemLy, diemHoa);
+
     return sv;
 }
